@@ -8,15 +8,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 import gloxeer.com.QuizContract.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class QuizDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "MyAwesomeQuiz.db";
     private static final int DATABASE_VERSION = 1;
     private SQLiteDatabase db;
+
     public QuizDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+    } //create helper object to create, open, and/or manage a database
+
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db) {   //create database table
         this.db = db;
         final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
                 QuestionsTable.TABLE_NAME + " ( " +
@@ -31,7 +34,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         fillQuestionsTable();
     }
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {   //
         db.execSQL("DROP TABLE IF EXISTS " + QuestionsTable.TABLE_NAME);
         onCreate(db);
     }
@@ -48,7 +51,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         addQuestion(q5);
     }
     private void addQuestion(Question question) {
-        ContentValues cv = new ContentValues();
+        ContentValues cv = new ContentValues(); //Creates an empty set of values using the default initial size
         cv.put(QuestionsTable.COLUMN_QUESTION, question.getQuestion());
         cv.put(QuestionsTable.COLUMN_OPTION1, question.getOption1());
         cv.put(QuestionsTable.COLUMN_OPTION2, question.getOption2());

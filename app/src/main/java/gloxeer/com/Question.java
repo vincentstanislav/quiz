@@ -1,6 +1,6 @@
 package gloxeer.com;
 
-public class Question {
+public class Question {     //public class question
     private String question;
     private String option1;
     private String option2;
